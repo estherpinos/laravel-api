@@ -31,7 +31,7 @@ class ProjectRequest extends FormRequest
 
     public function messages(){
         return[
-            "title.required" => "Ilt titolo è obbligatorio",
+            "title.required" => "Il titolo è obbligatorio",
             "description.required" => "La descrizione è obbligatoria",
             "type.required"=>"Devi selezzionare una tipologia",
             "technology.required"=>"Devi selezzionare una tecnhologia"

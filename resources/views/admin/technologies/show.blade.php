@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h3 class=" my-5">{{$tecnology->title}}</h3>
+<h3 class=" my-5">{{$technology->title}}</h3>
 
 <div class=" d-flex flex-row">
 

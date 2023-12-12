@@ -17,7 +17,7 @@
             @endif
 
         @csrf
-        <form action="{{route('admin.tecnologies.store')}}" method="POST">
+        <form action="{{route('admin.technologies.store')}}" method="POST">
             @csrf
 
             <div class="mb-3">

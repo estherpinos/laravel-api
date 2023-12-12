@@ -15,14 +15,14 @@
     </thead>
     <tbody>
 
-        @foreach ( $tecnologies as $tecnology )
+        @foreach ( $technologies as $technology )
 
         <tr>
-            <td>{{$tecnology->id}}</td>
-            <td>{{$tecnology->title}}</td>
+            <td>{{$technology->id}}</td>
+            <td>{{$technology->title}}</td>
             <td>
-                <a href="{{ route('admin.tecnlogoies.show', $tecnology) }}" class="btn btn-warning "><i class="fa-solid fa-eye"></i></a>
-                <a href="{{ route('admin.tecnlogoies.edit', $tecnology) }}" class="btn btn-danger"><i class="fa-solid fa-pencil"></i></a>
+                <a href="{{ route('admin.technlogoies.show', $technology) }}" class="btn btn-warning "><i class="fa-solid fa-eye"></i></a>
+                <a href="{{ route('admin.technlogoies.edit', $technology) }}" class="btn btn-danger"><i class="fa-solid fa-pencil"></i></a>
             </td>
 
 

@@ -43,12 +43,13 @@ class ProjectController extends Controller
         $new_project = new Project();
         $new_project->title =$form_data['title'];
         $new_project->description =$form_data['description'];
-        $new_project->type =$form_data['type_id'];
-        $new_project->type =$form_data['technology_id'];
+        $new_project->type=$form_data['type_id'];
+        $new_project->technology =$form_data['technology_id'];
 
 
 
         $new_project->save();
+
 
         return redirect()->route('admin.projects.show', $new_project->id);
 
@@ -79,7 +80,7 @@ class ProjectController extends Controller
         $form_data = $request->all();
         $project->update($form_data);
 
-        return redirect()->route('characters.show',$project);
+        return redirect()->route('characters.show', $project);
     }
 
     /**

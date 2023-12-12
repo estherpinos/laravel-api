@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-8">
 
-        @csrf
+
         <form action="{{route('admin.projects.store')}}" method="POST">
             @csrf
 
@@ -42,7 +42,7 @@
                         <option value="{{$type->id}}" {{old("type_id", $project?->type_id) == $type->id?'selected' : ''}}>{{$type->title}}</option>
                     @endforeach
                   </select>
-                  @error('type')
+                  @error('type_id')
                     <span class="text-danger">{{ $message }}</span>
                   @enderror
             </div>
@@ -53,7 +53,7 @@
                         <option value="{{$technology->id}}" {{old("technology_id", $project?->technology_id) == $technology->id?'selected' : ''}}>{{$technology->id}}</option>
                     @endforeach
                   </select>
-                  @error('technology')
+                  @error('technology_id')
                     <span class="text-danger">{{ $message }}</span>
                   @enderror
             </div>
