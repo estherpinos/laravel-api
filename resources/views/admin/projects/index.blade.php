@@ -26,18 +26,23 @@
             <td>{{$project->description}}</td>
             <td>{{$project->type->title}}</td>
             <td>
-                @forelse ($project->technologies->take(1) as $technology )
-                {{$technology->id}}
+                    @forelse ($project->technologies->take(1) as $technology)
+                        {{$technology->id}}
+                    @empty
+                        No technologies
+                    @endforelse
+            </td>
 
-            @empty
-
-            @endforelse</td>
 
 
 
             <td>
                 <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-warning "><i class="fa-solid fa-eye"></i></a>
                 <a href="{{ route('admin.projects.create', $project) }}" class="btn btn-danger"><i class="fa-solid fa-pencil"></i></a>
+                @include('admin.partials.form-delete',[
+                            'route' => route('admin.projects.destroy', $project),
+                            'message' => 'Sei sicuro di voler eliminare questo project?'
+                        ])
 
 
             </td>

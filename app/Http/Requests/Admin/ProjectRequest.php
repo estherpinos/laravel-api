@@ -24,8 +24,8 @@ class ProjectRequest extends FormRequest
         return [
             "title"=>"required|max:70",
             "description"=>"required",
-            "type"=>"required",
-            "technology"=>"required"
+            "type_id"=>"required",
+            "technology_id"=>"required"
         ];
     }
 
@@ -33,8 +33,8 @@ class ProjectRequest extends FormRequest
         return[
             "title.required" => "Il titolo è obbligatorio",
             "description.required" => "La descrizione è obbligatoria",
-            "type.required"=>"Devi selezzionare una tipologia",
-            "technology.required"=>"Devi selezzionare una tecnhologia"
+            "type_id.required"=>"Devi selezzionare una tipologia",
+            "technology_id.required"=>"Devi selezzionare una tecnhologia"
 
 
         ];

@@ -26,9 +26,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $method = 'POST';
+        $route = route('admin.projects.store');
         $project = null;
-        $types = type::all();
-        $technologies= technology::all();
+        $types = Type::all();
+        $technologies= Technology::all();
         return view('admin.projects.create', compact('project', 'types', 'technologies'));
 
     }
@@ -38,17 +40,18 @@ class ProjectController extends Controller
      */
     public function store(ProjectRequest $request)
     {
-        $form_data = $request->all();
+        $form_data = $request->validated();
 
-        $new_project = new Project();
-        $new_project->title =$form_data['title'];
-        $new_project->description =$form_data['description'];
-        $new_project->type=$form_data['type_id'];
-        $new_project->technology =$form_data['technology_id'];
-
+        $new_project = Project::create([
+        'title' => $form_data['title'],
+        'description' => $form_data['description'],
+        'type_id' => $form_data['type_id'],
 
 
+        ]);
         $new_project->save();
+        $new_project->technologies()->attach($form_data['technology_id']);
+
 
 
         return redirect()->route('admin.projects.show', $new_project->id);
@@ -80,7 +83,7 @@ class ProjectController extends Controller
         $form_data = $request->all();
         $project->update($form_data);
 
-        return redirect()->route('characters.show', $project);
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
@@ -89,8 +92,10 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(string $id)
+    public function destroy(project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('admin.projects.index')->with('success', 'Il project è stato eliminato correttamente');
+
     }
 }
