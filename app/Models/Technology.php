@@ -14,6 +14,7 @@ class Technology extends Model
 
     }
     protected $fillable = [
-        'title'
+        'title',
+        'slug'
     ];
 }
