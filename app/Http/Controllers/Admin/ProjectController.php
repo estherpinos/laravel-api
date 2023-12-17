@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
 use App\Models\Technology;
+use App\Functions\Helper;
+
 
 
 class ProjectController extends Controller
@@ -23,6 +25,8 @@ class ProjectController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *      * @return \Illuminate\Http\Response
+
      */
     public function create()
     {
@@ -37,29 +41,35 @@ class ProjectController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(ProjectRequest $request)
     {
-        $form_data = $request->validated();
+        $form_data = $request->all();
+        $new_project = new Project();
 
-        $new_project = Project::create([
-        'title' => $form_data['title'],
-        'description' => $form_data['description'],
-        'type_id' => $form_data['type_id'],
+        $new_project->title = $form_data['title'];
+        $new_project->description = $form_data['description'];
+        $new_project->type_id = $form_data['type_id'];
+        $new_project->slug  = Helper::generateSlug($form_data['title'], Project::class);
 
 
-        ]);
         $new_project->save();
+
         $new_project->technologies()->attach($form_data['technology_id']);
 
 
 
-        return redirect()->route('admin.projects.show', $new_project->id);
+        return redirect()->route('admin.projects.show', $new_project);
 
     }
 
     /**
      * Display the specified resource.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     *
      */
     public function show(string $id)
     {
@@ -69,6 +79,8 @@ class ProjectController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *  @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function edit(string $id)
     {

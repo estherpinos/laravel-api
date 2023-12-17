@@ -19,12 +19,16 @@
     <tbody>
 
         @foreach ( $projects as $project )
-
+        {{-- @dump($project->type->title) --}}
         <tr>
             <td>{{$project->id}}</td>
             <td>{{$project->title}}</td>
             <td>{{$project->description}}</td>
-            <td>{{$project->type->title}}</td>
+            <td>
+                {{ $project->type?->title ?? '-' }}
+            </td>
+
+
             <td>
                     @forelse ($project->technologies->take(1) as $technology)
                         {{$technology->id}}
